@@ -18,7 +18,7 @@ function App() {
       <Page   >
         <Card>
         <Text as="h2" variant="bodyMd">
-          Content inside a card
+          Content inside a card Hello
         </Text>
       </Card>
       </Page>

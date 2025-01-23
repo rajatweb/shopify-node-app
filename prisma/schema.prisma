@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model stores {
+  shop        String   @unique()
+  isActive    Boolean  @default(true)
+  installedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([shop])
+}
+
+model session {
+  id          String    @id
+  shop        String    
+  state       String    @default("")
+  isOnline    Boolean   @default(false)
+  scope       String?
+  expires     DateTime?
+  accessToken String
+
+  // Online session specific fields
+  onlineAccessInfo Json? // Stores the entire onlineAccessInfo object
+
+  // Associated user fields (from onlineAccessInfo.associated_user)
+  userId          BigInt?
+  userFirstName   String?
+  userLastName    String?
+  userEmail       String?
+  isAccountOwner  Boolean?
+  userLocale      String?
+  isCollaborator  Boolean?
+  isEmailVerified Boolean?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([id])
+  @@index([shop])
+  @@index([isOnline])
+}
+
+model countdownWidget {
+  content String
+  shop    String @unique
+
+  @@index([shop])
+}
+
+model datePickerWidget {
+  content String
+  shop    String @unique
+
+  @@index([shop])
+}
+
+model dayDelivery {
+  content String
+  shop    String @unique
+
+  @@index([shop])
+}
