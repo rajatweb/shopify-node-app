@@ -45,7 +45,7 @@ const verifyRequest = async (req: Request, res: Response, next: NextFunction) =>
     console.error(
       `---> An error happened at verifyRequest middleware: ${e.message}`
     );
-    return res.status(401).send({ error: "Unauthorized call" });
+    res.status(401).send({ error: "Unauthorized call" });
   }
 };
 

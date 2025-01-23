@@ -13,11 +13,11 @@ const verifyHmac = (req: Request, res: Response, next: NextFunction) => {
     if (shopify.auth.safeCompare(generateHash, hmac as string)) {
       next();
     } else {
-      return res.status(401).send();
+      res.status(401).send();
     }
   } catch (e) {
     console.log(e);
-    return res.status(401).send();
+    res.status(401).send();
   }
 };
 

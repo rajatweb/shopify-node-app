@@ -22,7 +22,7 @@ const verifyProxy = (req: Request, res: Response, next: NextFunction) => {
     res.locals.user_shop = req.query.shop;
     next();
   } else {
-    return res.status(401).send("Unauthorized");
+    res.status(401).send("Unauthorized");
   }
 };
 
